@@ -13,11 +13,11 @@ public class FileHandler {
      * This method generates a new file name and a bufferdwriter
      * @return
      */
-    public static BufferedWriter getNewFileWriter()
+    public static BufferedWriter getNewFileWriter(String clientId)
     {
         try {
             StringBuilder sb = new StringBuilder();
-            sb.append(LOG_ARCHIVE_PATH).append(System.nanoTime()).append(".txt");
+            sb.append(LOG_ARCHIVE_PATH).append(clientId).append("_").append(System.nanoTime()).append(".txt");
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(sb.toString(), false)));
             return bufferedWriter;
         } catch (FileNotFoundException e) {

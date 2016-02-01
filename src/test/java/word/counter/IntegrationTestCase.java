@@ -7,6 +7,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedHashMap;
 import java.io.*;
 
 /**
@@ -14,11 +15,14 @@ import java.io.*;
  */
 public class IntegrationTestCase {
 
-    private static final String TEXT_FILE_PATH = "C:\\Projects\\WordCounter\\WordCounter\\test.txt";
+    private static String TEXT_FILE_PATH = "test.txt";
     private static WebTarget target;
 
     public static void main(String[] args) {
-        JerseyClient c = (JerseyClient)ClientBuilder.newClient();
+        if (args != null && args.length >= 1) {
+            TEXT_FILE_PATH = args[0];
+        }
+        JerseyClient c = (JerseyClient) ClientBuilder.newClient();
         target = c.target(RestServiceApplication.BASE_URI);
         FileInputStream fileInputStream = null;
 
@@ -27,10 +31,9 @@ public class IntegrationTestCase {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         CounterResults response = null;
-            response = target.path("count/").request(MediaType.APPLICATION_JSON)
-                    .post(Entity.entity(fileInputStream, MediaType.APPLICATION_OCTET_STREAM), CounterResults.class);
+        response = target.path("count/").request(MediaType.APPLICATION_JSON).header("username", "TestClient")
+                .post(Entity.entity(fileInputStream, MediaType.APPLICATION_OCTET_STREAM), CounterResults.class);
 
         System.out.println(response);
     }

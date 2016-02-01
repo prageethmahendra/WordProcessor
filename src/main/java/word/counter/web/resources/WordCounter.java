@@ -16,10 +16,12 @@ public class WordCounter {
     @POST
     @Consumes({MediaType.APPLICATION_OCTET_STREAM})
     @Produces({MediaType.APPLICATION_JSON})
-    public CounterResults getWordCount(@HeaderParam("Transfer-Encoding")String transferEncoding,   InputStream attachmentInputStream) throws Exception {
+    public CounterResults getWordCount( @HeaderParam("username") String clientId,
+                                        @HeaderParam("Transfer-Encoding")String transferEncoding,
+                                        InputStream attachmentInputStream) throws Exception {
 
         WordProcessor wordProcessor = new WordProcessor();
-        CounterResults counterResults = wordProcessor.generateWordCounterResuts("1", attachmentInputStream);
+        CounterResults counterResults = wordProcessor.generateWordCounterResuts( clientId, attachmentInputStream);
         return counterResults;
     }
 }

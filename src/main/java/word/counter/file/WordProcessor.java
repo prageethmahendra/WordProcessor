@@ -23,7 +23,7 @@ public class WordProcessor {
     public CounterResults generateWordCounterResuts(String clientId, InputStream inputStream) {
 
         BufferedReader bufferedReader = FileHandler.getNewStreamReader(inputStream);
-        BufferedWriter bufferedWriter = FileHandler.getNewFileWriter();
+        BufferedWriter bufferedWriter = FileHandler.getNewFileWriter(clientId);
         String spCharactersAndwhiteSpaces = "[{}().,';:\"!`\t\r\n-=+/\\*$#@%^|]";
         HashMap<String, Long> wordCounterMap = new HashMap<>();
         String str;

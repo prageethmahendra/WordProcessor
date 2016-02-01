@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<application xmlns="http://wadl.dev.java.net/2009/02">
+    <doc xmlns:jersey="http://jersey.java.net/" jersey:generatedBy="Jersey: 2.22.1 2015-10-07 10:54:41"/>
+    <doc xmlns:jersey="http://jersey.java.net/" jersey:hint="This is simplified WADL with user and core resources only. To get full WADL with extended resources use the query parameter detail. Link: http://localhost:8080/wordcounter/application.wadl?detail=true"/>
+    <grammars>
+        <include href="application.wadl/xsd0.xsd">
+            <doc title="Generated" xml:lang="en"/>
+        </include>
+    </grammars>
+    <resources base="http://localhost:8080/wordcounter/">
+        <resource path="count">
+            <method id="getWordCount" name="POST">
+                <request>
+                    <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="Transfer-Encoding" style="header" type="xs:string"/>
+                    <representation mediaType="application/octet-stream"/>
+                </request>
+                <response>
+                    <ns2:representation xmlns:ns2="http://wadl.dev.java.net/2009/02" xmlns="" element="counterResults" mediaType="application/json"/>
+                </response>
+            </method>
+        </resource>
+    </resources>
+</application>
